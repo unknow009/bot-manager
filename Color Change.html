@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    background-color: rgb(254, 253, 253);
+    width: 30rem;
+    height: 12rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    font-size: 40px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0rem;
+}
+.container button{    
+    border-radius: 1rem;
+    font-size: 40px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 0.7rem 5rem;
+}
+</style>
+<body>
+    <div class="main">
+        <div class="container" id="contain">
+            <p id="color"></p>
+            <button  id="btn">Click Me</button>
+        </div>
+    </div>
+<script>
+const setBg = () => {
+const randomColor = Math.random() .toString(16) .slice(2,8) .padEnd(6,0);
+// console.log(randomColor);
+document.body.style.backgroundColor ="#" + randomColor;
+color.innerHTML ="#" + randomColor;
+}
+
+btn.addEventListener("click", setBg);
+setBg();
+</script>
+</body>
+</html>
