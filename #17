@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+
+public class Node
+{
+    public int data;
+    public Node left, right;
+
+    public Node(int d)
+    {
+        data = d;
+        left = right = null;
+    }
+}
+
+public class BinaryTree
+{
+    Node root;
+    List<Node> nodes = new List<Node>();
+
+    void storeBSTNodes(Node root)
+    {
+        if (root == null)
+            return;
+
+        storeBSTNodes(root.left);
+        nodes.Add(root);
+        storeBSTNodes(root.right);
+    }
+
+    Node buildTreeUtil(int start, int end)
+    {
+        if (start > end)
+            return null;
+
+        int mid = (start + end) / 2;
+        Node node = nodes[mid];
+
+        node.left = buildTreeUtil(start, mid - 1);
+        node.right = buildTreeUtil(mid + 1, end);
+
+        return node;
+    }
+
+    Node buildTree(Node root)
+    {
+        storeBSTNodes(root);
+        int n = nodes.Count;
+        return buildTreeUtil(0, n - 1);
+    }
+
+    void preOrder(Node node)
+    {
+        if (node == null)
+            return;
+
+        Console.Write(node.data + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    public static void Main(string[] args)
+    {
+        BinaryTree tree = new BinaryTree();
+        tree.root = new Node(10);
+        tree.root.left = new Node(8);
+        tree.root.left.left = new Node(7);
+        tree.root.left.left.left = new Node(6);
+        tree.root.left.left.left.left = new Node(5);
+
+        tree.root = tree.buildTree(tree.root);
+
+        Console.WriteLine("Preorder traversal of balanced BST is :");
+        tree.preOrder(tree.root);
+    }
+}
