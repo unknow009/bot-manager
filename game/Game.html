@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            display: grid;
+            grid-gap: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            grid-column: span 2;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            grid-column: span 2;
+        }
+
+        #output {
+            font-size: 20px;
+            color: #007BFF;
+            grid-column: span 2;
+        }
+
+        #guessInput {
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            grid-column: span 2;
+        }
+
+        #guessButton {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            grid-column: span 2;
+        }
+
+        #guessButton:hover {
+            background-color: #0056b3;
+        }
+
+        .icon {
+            font-size: 24px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Number Game <i class="far fa-question-circle icon"></i></h1>
+        <p>Try to guess the secret number between 1 and 100.</i</p>
+        <div id="output"></div>
+        <input type="text" id="guessInput" placeholder="Enter your guess">
+        <button id="guessButton">Submit Guess <i class="far fa-check-circle icon"></i></button>
+    </div>
+    <script>
+        // Generate a random number between 1 and 100
+        const secretNumber = Math.floor(Math.random() * 100) + 1;
+
+        let attempts = 0;
+
+        const output = document.getElementById('output');
+        const guessInput = document.getElementById('guessInput');
+        const guessButton = document.getElementById('guessButton');
+
+        function checkGuess() {
+            const userGuess = parseInt(guessInput.value);
+            attempts++;
+
+            if (userGuess === secretNumber) {
+                output.innerHTML = `Congratulations! You guessed the number ${secretNumber} in ${attempts} attempts. <i class="far fa-grin-stars icon"></i>`;
+                output.style.color = 'green';
+                guessInput.disabled = true;
+                guessButton.disabled = true;
+            } else if (userGuess > secretNumber) {
+                output.innerHTML = `Try a lower number (Attempts: ${attempts}) <i class="fas fa-arrow-down icon"></i>`;
+                output.style.color = 'red';
+            } else {
+                output.innerHTML = `Try a higher number (Attempts: ${attempts}) <i class="fas fa-arrow-up icon"></i>`;
+                output.style.color = 'red';
+            }
+        }
+
+        guessButton.addEventListener('click', checkGuess);
+    </script>
+</body>
+</html>
